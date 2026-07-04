@@ -1,0 +1,8 @@
+version: "4.2.0"
+dependencies:
+  bluepad32:
+    override_path: ./bluepad32
+  btstack:
+    override_path: ./btstack
+  espressif/arduino-esp32:
+    version: "=3.3.9"
