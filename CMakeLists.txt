@@ -6,7 +6,8 @@ set(srcs
         "ArduinoController.cpp"
         "ArduinoGamepad.cpp"
         "arduino_bootstrap.cpp"
-        "arduino_platform.c")
+        "arduino_platform.c"
+        "component_main.cpp")
 
  set(requires
          arduino-esp32

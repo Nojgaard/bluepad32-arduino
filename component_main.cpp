@@ -1,5 +1,12 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright 2024 Bluepad32 Project
+//
+// This file provides a default app_main() for projects using the
+// bluepad32-arduino component. It bootstraps BTstack and Bluepad32.
+//
+// Projects that need custom initialization can override this by
+// defining their own app_main() in their main component, since
+// this implementation uses weak linkage.
 
 #include "sdkconfig.h"
 
@@ -14,7 +21,8 @@
 #include <arduino_platform.h>
 #include <uni.h>
 
-extern "C" int app_main(void) {
+// Weak linkage so projects can override this with their own app_main()
+__attribute__((weak)) extern "C" int app_main(void) {
     // Don't use BTstack buffered UART. It conflicts with the console.
 #ifndef CONFIG_ESP_CONSOLE_UART_NONE
 #ifndef CONFIG_BLUEPAD32_USB_CONSOLE_ENABLE
@@ -29,6 +37,8 @@ extern "C" int app_main(void) {
     uni_platform_set_custom(get_arduino_platform());
 
     // Init Bluepad32.
+    // This triggers arduino_on_init_complete() which calls
+    // arduino_bootstrap(), spawning setup()/loop() as a task.
     uni_init(0 /* argc */, NULL /* argv */);
 
     // Does not return.
