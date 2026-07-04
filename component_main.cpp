@@ -22,7 +22,7 @@
 #include <uni.h>
 
 // Weak linkage so projects can override this with their own app_main()
-__attribute__((weak)) extern "C" int app_main(void) {
+extern "C" __attribute__((weak)) int app_main(void) {
     // Don't use BTstack buffered UART. It conflicts with the console.
 #ifndef CONFIG_ESP_CONSOLE_UART_NONE
 #ifndef CONFIG_BLUEPAD32_USB_CONSOLE_ENABLE
