@@ -31,7 +31,15 @@ app_main()                           [component_main.cpp — weak]
 
 ### 1. Add the component to your project
 
-Place `bluepad32-arduino` (along with its dependencies `bluepad32`, `btstack`, etc.) in your project's `components/` folder.
+In your project's `main/idf_component.yml` (or `idf_component.yml` at the project root), add:
+
+```yml
+dependencies:
+  Nojgaard/bluepad32-arduino:
+    git: https://github.com/Nojgaard/bluepad32-arduino
+```
+
+This tells ESP-IDF's dependency manager to clone the component directly from GitHub. The component's own `idf_component.yml` will automatically pull in its sub-dependencies (`bluepad32`, `btstack`, and `espressif/arduino-esp32`).
 
 ### 2. Configure `sdkconfig.defaults`
 
